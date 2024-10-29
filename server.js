@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require('express')
+const cors = require('cors')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const { Pool } = require('pg')
@@ -7,6 +8,11 @@ const { Pool } = require('pg')
 const app = express()
 const port = process.env.PORT || 3000
 const SECRET_KEY = process.env.SECRET_KEY || 'tu_clave_secreta'
+
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}))
 
 const pool = new Pool({
   user: 'postgres',
